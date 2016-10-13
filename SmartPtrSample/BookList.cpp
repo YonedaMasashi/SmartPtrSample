@@ -1,6 +1,7 @@
 #include "BookList.h"
 
 #include <algorithm>
+#include "Book.h"
 
 BookList::BookList()
 {
@@ -19,6 +20,6 @@ void BookList::addBooks(shared_ptr<Book> book)
 void BookList::print()
 {
 	for(auto book : cntBooks) {
-		cout << book->print() << endl;
+		book->print();
 	}
 }

@@ -7,9 +7,11 @@ class Book
 {
 public:
 	Book(string name);
-	~Book();
+	virtual ~Book();
 
 	void print();
+
+	void setName(string name);
 
 private:
 	string strName;

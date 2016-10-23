@@ -10,11 +10,24 @@ BookList::BookList()
 
 BookList::~BookList()
 {
+	for (auto book : cntBookNews) {
+		delete book;
+	}
 }
 
 void BookList::addBooks(shared_ptr<Book> book)
 {
 	cntBooks.push_back(book);
+}
+
+void BookList::addUniqueBooks(unique_ptr<Book> book)
+{
+	cntUniqBooks.push_back(book);
+}
+
+void BookList::addBooks(Book* book)
+{
+	cntBookNews.push_back(book);
 }
 
 void BookList::print()

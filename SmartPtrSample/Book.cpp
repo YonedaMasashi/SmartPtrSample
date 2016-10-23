@@ -2,9 +2,10 @@
 
 #include <memory>
 
-Book::Book(string name)
+Book::Book(string name, long price)
 {
 	strName = name;
+	lPrice = price;
 }
 
 
@@ -22,4 +23,6 @@ void Book::setName(string name)
 	strName = name;
 }
 
-
+long Book::getPrice() {
+	return lPrice;
+}

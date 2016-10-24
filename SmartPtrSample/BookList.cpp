@@ -22,7 +22,7 @@ void BookList::addBooks(shared_ptr<Book> book)
 
 void BookList::addUniqueBooks(unique_ptr<Book> book)
 {
-	cntUniqBooks.push_back(book);
+	cntUniqBooks.push_back(move(book));
 }
 
 void BookList::addBooks(Book* book)

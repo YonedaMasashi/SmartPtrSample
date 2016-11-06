@@ -6,6 +6,7 @@ using namespace std;
 class Book
 {
 public:
+	Book() {};
 	Book(string name, long price);
 	virtual ~Book();
 

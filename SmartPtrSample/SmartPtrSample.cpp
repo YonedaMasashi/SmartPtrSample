@@ -19,11 +19,14 @@ void test5();
 void test6();
 void test7();
 void test8();
+void test9();
+void test10();
+void test11();
 
 int main()
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	TimeSpan timeSpan;
 	try {
 		timeSpan.test("test1 基本形", test1);
@@ -35,6 +38,9 @@ int main()
 		timeSpan.test("test6 10000回 ptr", test7);
 		timeSpan.test("test7 10000回 unique_ptr", test8);
 		timeSpan.test("test8 10000回 shared_ptr", test6);
+		timeSpan.test("test9 配列に shared_ptr(double)", test9);
+		timeSpan.test("test10 配列に shared_ptr(Book)", test10);
+		timeSpan.test("test11 配列の中身が shared_ptr(Book)", test11);
 	}
 	catch (...) {
 		cout << "err" << endl;
@@ -135,4 +141,33 @@ void test8() {
 	}
 
 	//bookList->print();
+}
+
+void test9() {
+	shared_ptr<double> dValArray(new double[10]);
+}
+
+void test10() {
+	shared_ptr<Book> dValArray(new Book[10], default_delete<Book[]>());
+	//shared_ptr<Book> dValArray(new Book[10]);
+}
+
+void test11() {
+	/*
+	Book* books[10];
+	for (int i = 0; i < 10; ++i) {
+		char chBuf[108] = { 0 };
+		sprintf_s(chBuf, "Book%d", i);
+		Book* pBook = new Book(chBuf, i + 1);
+		books[i] = pBook;
+	}
+	*/
+	shared_ptr<Book> book[10];
+
+	for (int i = 1; i <= 10; ++i) {
+		char chBuf[108] = { 0 };
+		sprintf_s(chBuf, "Book%d", i);
+		auto booke(make_shared<Book>(chBuf, i));
+		book[i-1] = booke;
+	}
 }
